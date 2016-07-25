@@ -27,7 +27,7 @@
     });
 
     let port = new SerialPort('/dev/' + targetPort, {
-        baudRate: targetBaudrate
+        baudRate: parseInt(targetBaudrate)
     });
 
     port.on('open', function() {

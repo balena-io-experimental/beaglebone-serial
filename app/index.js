@@ -27,7 +27,8 @@
     });
 
     let port = new SerialPort('/dev/' + targetPort, {
-        baudRate: parseInt(targetBaudrate)
+        baudRate: parseInt(targetBaudrate),
+        parser: SerialPort.parsers.readline('\n')
     });
 
     port.on('open', function() {
@@ -43,8 +44,7 @@
     });
 
     port.on('data', function(data) {
-        console.log(chalk.yellow('RAW: ', data, '\n'));
-        console.log(chalk.green('READLINE PARSED: ', SerialPort.parsers.readline(data), '\n'));
+        console.log(chalk.yellow('Data received: ', data, '\n'));
     })
 
     // open errors will be emitted as an error event

@@ -4,6 +4,8 @@ FROM resin/%%RESIN_MACHINE_NAME%%-node:slim
 RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install -y \
   apt-utils \
   build-essential \
+  python-dev \
+  python-pip \
   wget \
   curl \
   git && rm -rf /var/lib/apt/lists/*

@@ -25,7 +25,7 @@
             console.log(chalk.green(JSON.stringify(foundPort)));
         });
     });
-
+    sleep.sleep(10);
     let port = new SerialPort('/dev/' + targetPort, {
         baudRate: parseInt(targetBaudrate),
         parser: SerialPort.parsers.readline('\n')

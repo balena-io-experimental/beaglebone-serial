@@ -33,7 +33,7 @@
     port.on('open', function() {
         sleep.sleep(3);
         console.log(chalk.cyan('write attempt: ', process.env.TEST_CMD));
-        port.writeAndDrain(process.env.TEST_CMD, function(err) {
+        port.write(process.env.TEST_CMD, function(err) {
             if (err) {
                 return console.log(chalk.red('Error on write: ', err.message));
             }

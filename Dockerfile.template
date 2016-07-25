@@ -1,0 +1,36 @@
+FROM resin/%%RESIN_MACHINE_NAME%%-node:slim
+
+# Install apt deps
+RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install -y \
+  apt-utils \
+  build-essential \
+  wget \
+  curl \
+  git && rm -rf /var/lib/apt/lists/*
+
+# Set npm
+RUN npm config set unsafe-perm true
+
+# Save source folder
+RUN printf "%s\n" "${PWD##}" > SOURCEFOLDER
+
+# Move to app dir
+WORKDIR /usr/src/app
+
+# Move package.json to filesystem
+COPY "$SOURCEFOLDER/app/package.json" ./
+
+# NPM i app
+RUN JOBS=MAX npm i --production
+
+# Move app to filesystem
+COPY "$SOURCEFOLDER/app" ./
+
+# Move to /
+WORKDIR /
+
+## uncomment if you want systemd
+ENV INITSYSTEM on
+
+# Start app
+CMD ["bash", "/usr/src/app/start.sh"]

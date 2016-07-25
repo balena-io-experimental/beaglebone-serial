@@ -1,0 +1,29 @@
+{
+  "name": "serial-test",
+  "version": "0.0.1",
+  "description": "an application that aims to debug serial communication on resin devices",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/resin-io-playground/serial-test.git"
+  },
+  "keywords": [
+    "serial",
+    "debug",
+    "resin"
+  ],
+  "author": "Carlo Maria Curinga <carlo@resin.io>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/resin-io-playground/serial-test/issues"
+  },
+  "homepage": "https://github.com/resin-io-playground/serial-test#readme",
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "serialport": "^4.0.1",
+    "sleep": "^3.0.1"
+  }
+}

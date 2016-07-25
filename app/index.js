@@ -31,6 +31,7 @@
     });
 
     port.on('open', function() {
+        console.log(chalk.green('connected to ', process.env.TARGET_PORT, 'with baudrate: ', process.env.TARGET_BAUDRATE));
         sleep.sleep(3);
         console.log(chalk.cyan('write attempt: ', process.env.TEST_CMD));
         port.write(process.env.TEST_CMD, function(err) {

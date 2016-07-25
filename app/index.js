@@ -18,9 +18,9 @@
         }
         ports.forEach(function(port) {
             let foundPort = {
-              comName: port.comName,
-              pnpId: port.pnpId,
-              manufacturer: port.manufacturer
+                comName: port.comName,
+                pnpId: port.pnpId,
+                manufacturer: port.manufacturer
             };
             console.log(chalk.green(JSON.stringify(foundPort)));
         });
@@ -32,7 +32,7 @@
 
     port.on('open', function() {
         sleep.sleep(3);
-        console.log(chalk.cyan('write attempt: ',process.env.TEST_CMD));
+        console.log(chalk.cyan('write attempt: ', process.env.TEST_CMD));
         port.writeAndDrain(process.env.TEST_CMD, function(err) {
             if (err) {
                 return console.log(chalk.red('Error on write: ', err.message));
@@ -41,9 +41,9 @@
         });
     });
 
-    port.on('data',function(data) {
-      console.log(chalk.yellow('RAW: ', data, '\n'));
-      console.log(chalk.green('READLINE PARSED: ', SerialPort.parsers.readline(data), '\n'));
+    port.on('data', function(data) {
+        console.log(chalk.yellow('RAW: ', data, '\n'));
+        console.log(chalk.green('READLINE PARSED: ', SerialPort.parsers.readline(data), '\n'));
     })
 
     // open errors will be emitted as an error event

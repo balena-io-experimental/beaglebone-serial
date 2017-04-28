@@ -7,7 +7,13 @@ an application that aims to debug serial communication on resin devices
 * opens a connection to the target serialport
 * writes a message and listens for incoming data.
 
-## how to use
+## Configuration
+
+- set the following variables in the `Fleet Configuration` application side tab or `Device Configuration` device side tab
+
+  - `RESIN_HOST_CONFIG_enable_uart` = `1`
+
+## How to use
 
 set the following (optional) env-vars:
 * `TARGET_PORT` => the serialport you want to debug

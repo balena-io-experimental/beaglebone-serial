@@ -3,23 +3,17 @@ FROM resin/%%RESIN_MACHINE_NAME%%-alpine-node:6-slim
 # Install deps
 RUN apk add --no-cache make gcc g++ python linux-headers udev
 
-# Set npm
-RUN npm config set unsafe-perm true
-
-# Save source folder
-RUN printf "%s\n" "${PWD##}" > SOURCEFOLDER
-
 # Move to app dir
 WORKDIR /usr/src/app
 
 # Move package.json to filesystem
-COPY "$SOURCEFOLDER/app/package.json" ./
+COPY ./app/package.json ./
 
 # NPM i app
 RUN JOBS=MAX npm i --production --build-from-source=serialport
 
 # Move app to filesystem
-COPY "$SOURCEFOLDER/app" ./
+COPY ./app ./
 
 # Move to /
 WORKDIR /

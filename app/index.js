@@ -10,11 +10,15 @@
 
   SerialPort.list((err, ports) => {
     'use strict';
-    console.log(chalk.yellow('List of serial interfaces:\n'));
+    console.log(chalk.yellow('\nList of serial interfaces:'));
     ports.forEach((port) => {
       console.log(chalk.yellow(port.comName));
-      console.log(chalk.yellow(port.pnpId));
-      console.log(chalk.yellow(port.manufacturer));
+      if (port.pnpId) {
+        console.log(chalk.yellow(port.pnpId));
+      }
+      if (port.manufacturer) {
+        console.log(chalk.yellow(port.manufacturer));
+      }
     });
     console.log(chalk.yellow('\n'));
   });

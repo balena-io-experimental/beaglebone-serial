@@ -1,6 +1,6 @@
 {
   "name": "serial-test",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "an application that aims to debug serial communication on resin devices",
   "main": "index.js",
   "scripts": {
@@ -20,10 +20,13 @@
   "bugs": {
     "url": "https://github.com/resin-io-playground/serial-test/issues"
   },
+  "jshintConfig": {
+    "esversion": 6,
+    "strict": true
+  },
   "homepage": "https://github.com/resin-io-playground/serial-test#readme",
   "dependencies": {
     "chalk": "^1.1.3",
-    "serialport": "^4.0.1",
-    "sleep": "^3.0.1"
+    "serialport": "^4.0.7"
   }
 }

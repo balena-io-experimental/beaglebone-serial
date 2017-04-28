@@ -1,14 +1,7 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-node:slim
+FROM resin/%%RESIN_MACHINE_NAME%%-alpine-node:6-slim
 
-# Install apt deps
-RUN apt-get clean && apt-get update && apt-get upgrade -y && apt-get install -y \
-  apt-utils \
-  build-essential \
-  python-dev \
-  python-pip \
-  wget \
-  curl \
-  git && rm -rf /var/lib/apt/lists/*
+# Install deps
+RUN apk add --no-cache make gcc g++ python linux-headers udev
 
 # Set npm
 RUN npm config set unsafe-perm true
@@ -23,7 +16,7 @@ WORKDIR /usr/src/app
 COPY "$SOURCEFOLDER/app/package.json" ./
 
 # NPM i app
-RUN JOBS=MAX npm i --production
+RUN JOBS=MAX npm i --production --build-from-source=serialport
 
 # Move app to filesystem
 COPY "$SOURCEFOLDER/app" ./

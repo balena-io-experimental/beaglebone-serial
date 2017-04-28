@@ -1,7 +1,7 @@
 # serial-test
 an application that aims to debug serial communication on resin devices
 
-####What does this application do?
+#### What does this application do?
 
 * lists serial interfaces
 * opens a connection to the target serialport

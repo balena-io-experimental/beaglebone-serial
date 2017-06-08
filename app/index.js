@@ -7,7 +7,7 @@
   const port = new SerialPort(process.env.TARGET_PORT, {
     baudRate: parseInt(process.env.TARGET_BAUDRATE)
   });
-
+  
   SerialPort.list((err, ports) => {
     'use strict';
     console.log('\nList of serial interfaces:');
@@ -23,14 +23,18 @@
     console.log('\n');
   });
 
+  console.log("Using serial: " + process.env.TARGET_PORT);
+
   port.on('open', () => {
     'use strict';
-    port.write(process.env.TEST_CMD, (err) => {
-      if (err) {
-        return console.log(chalk.red('Error on write: ', err.message));
-      }
-      console.log(chalk.magenta('message written'));
-    });
+    setInterval(function(){  
+      port.write(process.env.TEST_CMD, (err) => {
+        if (err) {
+          return console.log(chalk.red('Error on write: ', err.message));
+        }
+        console.log(chalk.magenta('message written'));
+      });
+    }, 3000);
   });
 
   // open errors will be emitted as an error event

@@ -1,3 +1,8 @@
 #!/bin/bash
 
-DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host_run/dbus/system_bus_socket node /usr/src/app/index.js
+echo BB-UART1 > /sys/devices/platform/bone_capemgr/slots
+echo BB-UART4 > /sys/devices/platform/bone_capemgr/slots
+sleep 5
+cat /sys/devices/platform/bone_capemgr/slots
+
+node /usr/src/app/index.js

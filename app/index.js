@@ -21,7 +21,7 @@
         if (err) {
           return console.log(chalk.red('Error on write: ', err.message));
         }
-        console.log(chalk.magenta('message written'));
+        console.log(chalk.magenta('message written to /dev/ttyS1'));
       });
     }, 3000);
   });
@@ -34,7 +34,7 @@
 
   serialReader.on('data', (data) => {
     'use strict';
-    console.log(chalk.cyan('Data: ' + data));
+    console.log(chalk.cyan('Data from /dev/ttyS4: ' + data));
   });
 
 }

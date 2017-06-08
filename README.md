@@ -1,21 +1,17 @@
-# serial-test
-an application that aims to debug serial communication on resin devices
+# Beaglebone dual serial-test
+An application that aims to debug serial communication on resin Beaglebone devices
 
 #### What does this application do?
 
-* lists serial interfaces
-* opens a connection to the target serialport
-* writes a message and listens for incoming data.
-
-## Configuration
-
-- set the following variables in the `Fleet Configuration` application side tab or `Device Configuration` device side tab
-
-  - `RESIN_HOST_CONFIG_enable_uart` = `1`
+* Enables UART1 and UART4
+* Writes a string on `/dev/ttyS1` (UART1) every 3 seconds
+* listens for incoming data on `/dev/ttyS4` (UART4) and writes it to console.
 
 ## How to use
 
+To get serial loop you need to connect the Tx pin of UART1 to the Rx of UART4. Make sure the wires are relatively short as TTL (3.3v) level serial connections can get pretty noisy and messed up if your wires are long.
+
 set the following (optional) env-vars:
-* `TARGET_PORT` => the serialport you want to debug
-* `TARGET_BAUDRATE` => the baudrate you want
 * `TEST_CMD` => a write command you want to test
+* `TARGET_BAUDRATE` => the baudrate you want
+

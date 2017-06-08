@@ -4,8 +4,8 @@
 
   const chalk = require('chalk');
   const SerialPort = require('serialport');
-  const port = new SerialPort('/dev/ttyS1', {
-    baudRate: parseInt('9600')
+  const port = new SerialPort(process.env.TARGET_PORT, {
+    baudRate: parseInt(process.env.TARGET_BAUDRATE)
   });
 
   SerialPort.list((err, ports) => {

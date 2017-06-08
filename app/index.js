@@ -1,31 +1,17 @@
 #!/bin/env node
 
 {
-
+  const testingString = process.env.TEST_CMD || "hello, world!"
   const chalk = require('chalk');
   const SerialPort = require('serialport');
-  const port = new SerialPort(process.env.TARGET_PORT, {
+  const serialWriter = new SerialPort('/dev/ttyS1', {
     baudRate: parseInt(process.env.TARGET_BAUDRATE)
   });
-  
-  SerialPort.list((err, ports) => {
-    'use strict';
-    console.log('\nList of serial interfaces:');
-    ports.forEach((port) => {
-      console.log(chalk.yellow(port.comName));
-      if (port.pnpId) {
-        console.log(chalk.yellow(port.pnpId));
-      }
-      if (port.manufacturer) {
-        console.log(chalk.yellow(port.manufacturer));
-      }
-    });
-    console.log('\n');
+  const serialReader = new SerialPort('/dev/ttyS4', {
+    baudRate: parseInt(process.env.TARGET_BAUDRATE)
   });
 
-  console.log("Using serial: " + process.env.TARGET_PORT);
-
-  port.on('open', () => {
+  serialWriter.on('open', () => {
     'use strict';
     setInterval(function(){  
       port.write(process.env.TEST_CMD, (err) => {
@@ -38,12 +24,12 @@
   });
 
   // open errors will be emitted as an error event
-  port.on('error', (err) => {
+  serialReader.on('error', (err) => {
     'use strict';
     console.log(chalk.red('Error: ', err.message));
   });
 
-  port.on('data', (data) => {
+  serialReader.on('data', (data) => {
     'use strict';
     console.log(chalk.cyan('Data: ' + data));
   });

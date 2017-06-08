@@ -10,11 +10,14 @@
   const serialReader = new SerialPort('/dev/ttyS4', {
     baudRate: parseInt(process.env.TARGET_BAUDRATE)
   });
-
+  serialReader.on('open', () => {
+    console.log("Opened serialReader");
+  });
   serialWriter.on('open', () => {
     'use strict';
+    console.log("Opened serialWrite")
     setInterval(function(){  
-      port.write(process.env.TEST_CMD, (err) => {
+      serialWriter.write(process.env.TEST_CMD, (err) => {
         if (err) {
           return console.log(chalk.red('Error on write: ', err.message));
         }
